@@ -44,6 +44,7 @@ while True:
                 item = item.title()
                 print(f"{index + 1}-{item}")
                 # todos.index("xxx")
+
         case 'edit':
             number = int(input("Enter the number of the todo to edit: "))
             number -= 1
@@ -56,13 +57,15 @@ while True:
 
             with open("todos.txt", "w") as file:
                 file.writelines(todos)
+
         case 'complete':
             number = int(input("Enter the number of the todo to complete: "))
             with open("todos.txt", "r") as file:
                 todos = file.readlines()
 
-            todo_completed = todos[number - 1].strip("\n").title()
-            todos.pop(number - 1)
+            index = number - 1
+            todo_completed = todos[index].strip("\n").title()
+            todos.pop(index)
             # todos.remove("xxx")
 
             with open("todos.txt", "w") as file:
@@ -70,8 +73,10 @@ while True:
 
             message = f"Todo [{todo_completed}] was removed from the list."
             print(message)
+
         case 'exit':
             break
+
         case whatever:
             print("Hey, you entered an unknown command.")
 
