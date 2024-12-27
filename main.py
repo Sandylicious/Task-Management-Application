@@ -7,17 +7,52 @@ while True:
         case 'add':
             todo = input("Enter a todo: ") + "\n"
 
-            file = open("todos.txt", "r")
-            todos = file.readlines()
-            file.close()
+            # method 1 (read from file)
+            # file = open("todos.txt", "r")
+            # todos = file.readlines()
+            # file.close()
+
+            # method 2
+            with open("todos.txt", "r") as file:
+                todos = file.readlines()
 
             todos.append(todo)
 
-            file = open("todos.txt", "w")
-            file.writelines(todos)
-            file.close()
+            # method 1
+            # file = open("todos.txt", "w")
+            # file.writelines(todos)
+            # file.close()
+
+            # method 2
+            with open("todos.txt", "w") as file:
+                file.writelines(todos)
+
         case 'show':
+            # method 1
+            # file = open("todos.txt", "r")
+            # todos = file.readlines()
+            # file.close()
+
+            # method 2
+            with open("todos.txt", "r") as file:
+                todos = file.readlines()
+
+            # method 1 (to remove the extra \n from each todoitem)
+            # new_todos = []
+            #
+            # for item in todos:
+            #     new_item = item.strip("\n")
+            #     new_todos.append(new_item)
+
+            # method 2
+            #new_todos = [item.strip("\n") for item in todos]
+
+            # method 1 & 2
+            #for index, item in enumerate(new_todos):
+
+            # method 3
             for index, item in enumerate(todos):
+                item = item.strip("\n")
                 item = item.title()
                 print(f"{index + 1}-{item}")
                 # todos.index("xxx")
@@ -28,8 +63,14 @@ while True:
             todos[number] = new_todo
         case 'complete':
             number = int(input("Enter the number of the todo to complete: "))
-            number -= 1
-            todos.pop(number)
+            with open("todos.txt", "r") as file:
+                todos = file.readlines()
+
+            todos.pop(number - 1)
+
+            with open("todos.txt", "w") as file:
+                file.writelines(todos)
+
             # todos.remove("xxx")
         case 'exit':
             break
@@ -37,16 +78,6 @@ while True:
             print("Hey, you entered an unknown command.")
 
 print("Bye!")
-
-
-
-
-
-
-
-
-
-
 
 
 
