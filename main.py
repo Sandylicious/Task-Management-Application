@@ -1,11 +1,4 @@
-def get_todos(filepath="todos.txt"):
-    with open(filepath, "r") as file_local:
-        todos_local = file_local.readlines()
-    return todos_local
-
-def write_todos(filepath, todos_arg):
-    with open(filepath, "w") as file:
-        file.writelines(todos_arg)
+from functions import get_todos, write_todos
 
 while True:
     user_action = input("Type add, show, edit, complete or exit: ").strip()
@@ -15,7 +8,7 @@ while True:
 
         todos = get_todos()
         todos.append(todo)
-        write_todos("todos.txt", todos)
+        write_todos(todos)
 
     elif user_action.startswith("show"):
         todos = get_todos()
@@ -34,7 +27,7 @@ while True:
 
             todos = get_todos()
             todos[number] = new_todo + '\n'
-            write_todos("todos.txt", todos)
+            write_todos(todos)
         except ValueError:
             print("Invalid input.")
             continue
@@ -50,7 +43,7 @@ while True:
             todos.pop(index)
             # todos.remove("xxx")
 
-            write_todos("todos.txt", todos)
+            write_todos(todos)
 
             message = f"Todo [{todo_completed}] was removed from the list."
             print(message)
