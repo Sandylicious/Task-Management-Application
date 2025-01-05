@@ -2,13 +2,16 @@ import functions
 import FreeSimpleGUI as sg
 import time
 
+# GUI Theme
+sg.theme('LightBrown')
+
 # Time
 clock = sg.Text("", key="clock")    # we access sg.Text() using key value
 
 # Add to-do
-label = sg.Text("Type in a to-do")
+label = sg.Text("Type in a to-do", text_color="Grey")
 input_box = sg.InputText(tooltip="Enter a to-do", key="todo")
-add_button = sg.Button("Add")
+add_button = sg.Button("Add", size=10)
 
 # Edit to-do
 list_box = sg.Listbox(values=functions.get_todos(), key="todos",
@@ -21,7 +24,7 @@ complete_button = sg.Button("Complete")
 # Exit
 exit_button = sg.Button("Exit")
 
-# Window
+# Display window
 window = sg.Window("My To-Do App",
                    layout=[[clock],
                            [label],
@@ -81,7 +84,7 @@ while True:
                 sg.popup("Please select a to-do first.", font=("Helvetica", 14))
 
         case "todos":
-            # update user input window so it shows the selected to-do from edit window
+            # update user input window, so it shows the selected to-do from edit window
             window["todo"].update(value=values["todos"][0])
 
         case "Exit":
